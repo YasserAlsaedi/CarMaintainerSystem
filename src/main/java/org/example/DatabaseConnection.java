@@ -38,7 +38,7 @@ public class DatabaseConnection {
             System.err.println("[DB] Error closing connection: " + e.getMessage());
         }
     }
-    
+
 
     }
 
