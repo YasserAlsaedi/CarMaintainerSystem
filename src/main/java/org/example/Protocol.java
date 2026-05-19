@@ -1,3 +1,5 @@
+package org.example;
+
 public class Protocol {
 
     public static final String ADD_CUSTOMER     = "ADD_CUSTOMER";
