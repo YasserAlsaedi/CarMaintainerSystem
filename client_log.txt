@@ -1,0 +1,6 @@
+[SENT] Hello
+[RECV] ERROR|Unknown command: HELLO
+---
+[SENT] MynameisYasser
+[RECV] ERROR|Unknown command: MYNAMEISYASSER
+---
