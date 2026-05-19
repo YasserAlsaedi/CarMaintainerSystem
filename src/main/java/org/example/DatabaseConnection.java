@@ -8,7 +8,7 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/car_maintenance";
     private static final String USER = "root";
-    private static final String PASSWORD = "your_password_here";
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     private static Connection connection = null;
 
@@ -38,6 +38,7 @@ public class DatabaseConnection {
             System.err.println("[DB] Error closing connection: " + e.getMessage());
         }
     }
+    
 
     }
 
