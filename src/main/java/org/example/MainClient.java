@@ -49,11 +49,22 @@ public class MainClient {
                 logWriter.println("[SENT] " + input);
 
                 // Read server response
-                String response = serverIn.readLine();
-                System.out.println("\n[Server Response]\n" + response.replace("|", " "));
+               // String response = serverIn.readLine();
+               // System.out.println("\n[Server Response]\n" + response.replace("|", " "));
+                StringBuilder fullResponse = new StringBuilder();
+                String line;
+                // Read all available lines from server
+                while (serverIn.ready() || fullResponse.length() == 0) {
+                    line = serverIn.readLine();
+                    if (line == null) break;
+                    fullResponse.append(line).append("\n");
+                    if (!serverIn.ready()) break;
+                }
+                System.out.println("\n[Server Response]\n" + fullResponse.toString().replace("|", " "));
 
                 // Log the response
-                logWriter.println("[RECV] " + response);
+                //logWriter.println("[RECV] " + response);
+                logWriter.println("[RECV] " + fullResponse.toString());
                 logWriter.println("---");
 
                 // Exit if done
@@ -75,11 +86,13 @@ public class MainClient {
                 │           Available Commands                             │
                 ├──────────────────────────────────────────────────────────┤
                 │ ADD_CUSTOMER|name|phone|email                            │
+                │ REMOVE_CUSTOMER|customerId                               │
                 │ ADD_CAR|customerId|make|model|plateNumber                │
                 │ BOOK_APPOINTMENT|carId|date(YYYY-MM-DD HH:MM)|desc      │
                 │ UPDATE_STATUS|appointmentId|Pending/In Progress/Done    │
                 │ VIEW_APPOINTMENTS                                        │
                 │ VIEW_CUSTOMERS                                           │
+                │ VIEW_CARS                                                │
                 │ EXIT                                                     │
                 └──────────────────────────────────────────────────────────┘
                 Examples:

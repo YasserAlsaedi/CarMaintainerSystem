@@ -77,6 +77,16 @@ public class ClientHandler implements Runnable {
                             : Protocol.ERROR   + "|Failed to add customer.";
                 }
 
+                // REMOVE_CUSTOMER|customerId
+                case Protocol.REMOVE_CUSTOMER: {
+                    if (parts.length < 2)
+                        return Protocol.ERROR + "|Missing fields. Usage: REMOVE_CUSTOMER|customerId";
+                    int id = Integer.parseInt(parts[1]);
+                    boolean ok = customerDAO.removeCustomer(id);
+                    return ok ? Protocol.SUCCESS + "|Customer removed successfully."
+                            : Protocol.ERROR   + "|Customer not found or could not be removed.";
+                }
+
                 // ADD_CAR|customerId|make|model|plateNumber
                 case Protocol.ADD_CAR: {
                     if (parts.length < 5)
@@ -135,6 +145,19 @@ public class ClientHandler implements Runnable {
                     for (Customer c : list) {
                         sb.append(String.format("\n  [#%d] %s | Phone: %s | Email: %s",
                                 c.getId(), c.getName(), c.getPhone(), c.getEmail()));
+                    }
+                    return sb.toString();
+                }
+
+                // VIEW_CARS
+                case Protocol.VIEW_CARS: {
+                    List<Car> list = carDAO.getAllCars();
+                    if (list.isEmpty()) return Protocol.DATA + "|No cars found.";
+                    StringBuilder sb = new StringBuilder(Protocol.DATA + "|");
+                    for (Car c : list) {
+                        sb.append(String.format("\n  [#%d] %s %s | Plate: %s | CustomerId: %d",
+                                c.getId(), c.getMake(), c.getModel(),
+                                c.getPlateNumber(), c.getCustomerId()));
                     }
                     return sb.toString();
                 }

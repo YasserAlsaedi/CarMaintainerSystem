@@ -32,6 +32,20 @@ public class CustomerDAO {
         }
     }
 
+    // REMOVE
+    public boolean removeCustomer(int id) {
+        String sql = "DELETE FROM Customers WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            System.err.println("[DAO] Error removing customer: " + e.getMessage());
+            return false;
+        }
+    }
+
     // READ ALL
     public List<Customer> getAllCustomers() {
         List<Customer> list = new ArrayList<>();

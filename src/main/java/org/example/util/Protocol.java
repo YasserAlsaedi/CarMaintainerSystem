@@ -3,11 +3,13 @@ package org.example.util;
 public class Protocol {
 
     public static final String ADD_CUSTOMER     = "ADD_CUSTOMER";
+    public static final String REMOVE_CUSTOMER = "REMOVE_CUSTOMER";
     public static final String ADD_CAR          = "ADD_CAR";
     public static final String BOOK_APPOINTMENT = "BOOK_APPOINTMENT";
     public static final String UPDATE_STATUS     = "UPDATE_STATUS";
     public static final String VIEW_APPOINTMENTS = "VIEW_APPOINTMENTS";
     public static final String VIEW_CUSTOMERS    = "VIEW_CUSTOMERS";
+    public static final String VIEW_CARS = "VIEW_CARS";
     public static final String EXIT              = "EXIT";
 
     public static final String SUCCESS  = "SUCCESS";
